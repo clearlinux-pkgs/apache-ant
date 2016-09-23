@@ -11,7 +11,7 @@ Buildrequires: apache-ant
 Buildrequires: python3
 Buildrequires: six
 Buildrequires: lxml
-BuildRequires: javapackages-tools
+Buildrequires: javapackages-tools
 
 %description
 A     N     T
@@ -26,21 +26,26 @@ without makes wrinkles and with the full portability of pure java code.
 
 %build
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk/
-ant jars test-jar
+mkdir dist
+sh build.sh -Ddist.dir=dist dist
 
 %install
+rm -rf %{buildroot}
+export ANT_HOME=%{buildroot}/usr/share/ant
+sh build.sh install
+
 # Create ant directory
-mkdir -p %{buildroot}/usr/share/ant/{lib,etc,bin}
 mkdir -p %{buildroot}/usr/bin
 install -d -m 755 %{buildroot}/usr/share/java/ant
 install -d -m 755 %{buildroot}/usr/share/maven-poms
 install -d -m 755 %{buildroot}/usr/share/maven-metadata
 
-# Symlinks to binaries
-cp -p src/script/{ant,antRun} %{buildroot}/usr/bin
-ln -sf /usr/bin/ant %{buildroot}/usr/share/ant/bin/
-ln -sf /usr/bin/antRun %{buildroot}/usr/share/ant/bin/
+# Remove unnecesary poms
+rm %{buildroot}/usr/share/ant/lib/*.pom
 
+# Symlinks to binaries
+ln -s ../share/ant/bin/ant %{buildroot}/usr/bin/ant
+ln -s ../share/ant/bin/antRun %{buildroot}/usr/bin/antRun
 
 find -name build.xml -o -name pom.xml | xargs sed -i -e s/-SNAPSHOT//
 
@@ -52,6 +57,11 @@ do
     # Install jars
     install -m 644 ${jar} %{buildroot}/usr/share/java/ant/${jarname}.jar
     ln -sf ../../java/ant/${jarname}.jar %{buildroot}/usr/share/ant/lib/${jarname}.jar
+
+    # add backward compatibility for nodeps jar that is now part of main jar
+    alias=
+    [ $jarname == ant ] && alias=org.apache.ant:ant-nodeps,apache:ant,ant:ant
+    [ $jarname == ant-launcher ] && alias=ant:ant-launcher
 
     # Install poms
     [ $jarname == ant-bootstrap ] && continue
@@ -67,9 +77,12 @@ do
 
 done
 
+for mod in ant ant-bootstrap ant-launcher; do
+    ln -sf ant/${mod}.jar $RPM_BUILD_ROOT/usr/share/java
+done
+
 # ant-parent pom
 install -p -m 644 src/etc/poms/pom.xml %{buildroot}/usr/share/maven-poms/JPP-ant-parent.pom
-
 
 python3 /usr/share/java-utils/maven_depmap.py \
     -n "" \
@@ -132,6 +145,9 @@ python3 /usr/share/java-utils/maven_depmap.py \
    /usr/share/java/ant/ant-swing.jar
    /usr/share/java/ant/ant-testutil.jar
    /usr/share/java/ant/ant.jar
+   /usr/share/java/ant-bootstrap.jar
+   /usr/share/java/ant-launcher.jar
+   /usr/share/java/ant.jar
    /usr/share/maven-metadata/ant-ant.xml
    /usr/share/maven-metadata/ant-antlr.xml
    /usr/share/maven-metadata/ant-apache-bcel.xml
@@ -176,3 +192,44 @@ python3 /usr/share/java-utils/maven_depmap.py \
    /usr/share/maven-poms/JPP.ant-ant-swing.pom
    /usr/share/maven-poms/JPP.ant-ant-testutil.pom
    /usr/share/maven-poms/JPP.ant-ant.pom
+   /usr/share/ant/manual/*
+   /usr/share/ant/CONTRIBUTORS
+   /usr/share/ant/INSTALL
+   /usr/share/ant/KEYS
+   /usr/share/ant/LICENSE
+   /usr/share/ant/NOTICE
+   /usr/share/ant/README
+   /usr/share/ant/WHATSNEW
+   /usr/share/ant/bin/ant.bat
+   /usr/share/ant/bin/ant.cmd
+   /usr/share/ant/bin/antRun.bat
+   /usr/share/ant/bin/antRun.pl
+   /usr/share/ant/bin/antenv.cmd
+   /usr/share/ant/bin/complete-ant-cmd.pl
+   /usr/share/ant/bin/envset.cmd
+   /usr/share/ant/bin/lcp.bat
+   /usr/share/ant/bin/runant.pl
+   /usr/share/ant/bin/runant.py
+   /usr/share/ant/bin/runrc.cmd
+   /usr/share/ant/contributors.xml
+   /usr/share/ant/etc/ant-bootstrap.jar
+   /usr/share/ant/etc/changelog.xsl
+   /usr/share/ant/etc/checkstyle/checkstyle-frames-sortby-check.xsl
+   /usr/share/ant/etc/checkstyle/checkstyle-frames.xsl
+   /usr/share/ant/etc/checkstyle/checkstyle-text.xsl
+   /usr/share/ant/etc/checkstyle/checkstyle-xdoc.xsl
+   /usr/share/ant/etc/coverage-frames.xsl
+   /usr/share/ant/etc/jdepend-frames.xsl
+   /usr/share/ant/etc/jdepend.xsl
+   /usr/share/ant/etc/junit-frames-xalan1.xsl
+   /usr/share/ant/etc/junit-frames.xsl
+   /usr/share/ant/etc/junit-noframes.xsl
+   /usr/share/ant/etc/log.xsl
+   /usr/share/ant/etc/maudit-frames.xsl
+   /usr/share/ant/etc/mmetrics-frames.xsl
+   /usr/share/ant/etc/tagdiff.xsl
+   /usr/share/ant/fetch.xml
+   /usr/share/ant/get-m2.xml
+   /usr/share/ant/lib/README
+   /usr/share/ant/lib/libraries.properties
+   /usr/share/ant/patch.xml
