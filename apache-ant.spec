@@ -1,6 +1,6 @@
 Name     : apache-ant
 Version  : 1.9.7
-Release  : 4
+Release  : 5
 URL      : http://apache.spinellicreations.com//ant/source/apache-ant-1.9.7-src.tar.gz
 Source0  : http://apache.spinellicreations.com//ant/source/apache-ant-1.9.7-src.tar.gz
 Summary  : No detailed summary available
