@@ -1,6 +1,6 @@
 Name     : apache-ant
 Version  : 1.10.1
-Release  : 6
+Release  : 7
 URL      : http://mirror.jax.hugeserver.com/apache//ant/source/apache-ant-1.10.1-src.tar.gz
 Source0  : http://mirror.jax.hugeserver.com/apache//ant/source/apache-ant-1.10.1-src.tar.gz
 Summary  : Apache Ant is a Java library and command-line tool that help building software.
