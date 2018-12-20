@@ -1,11 +1,12 @@
 Name     : apache-ant
-Version  : 1.10.1
-Release  : 9
-URL      : http://mirror.jax.hugeserver.com/apache//ant/source/apache-ant-1.10.1-src.tar.gz
-Source0  : http://mirror.jax.hugeserver.com/apache//ant/source/apache-ant-1.10.1-src.tar.gz
+Version  : 1.10.5
+Release  : 10
+URL      : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.5-src.tar.gz
+Source0  : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.5-src.tar.gz
 Summary  : Apache Ant is a Java library and command-line tool that help building software.
 Group    : Development/Tools
 License  : Apache-2.0
+BuildRequires: openjdk
 BuildRequires: openjdk-dev
 Buildrequires: lxml
 Buildrequires: python3
@@ -16,7 +17,7 @@ Ant is a Java based build tool. In theory it is kind of like "make"
 without makes wrinkles and with the full portability of pure java code.
 
 %prep
-%setup -q -n apache-ant-1.10.1
+%setup -q -n apache-ant-1.10.5
 
 %build
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk/
@@ -108,6 +109,8 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/lib/ant-junit.pom
 /usr/share/ant/lib/ant-junit4.jar
 /usr/share/ant/lib/ant-junit4.pom
+/usr/share/ant/lib/ant-junitlauncher.jar
+/usr/share/ant/lib/ant-junitlauncher.pom
 /usr/share/ant/lib/ant-launcher.jar
 /usr/share/ant/lib/ant-launcher.pom
 /usr/share/ant/lib/ant-netrexx.jar
@@ -204,6 +207,7 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/manual/Tasks/jlink.html
 /usr/share/ant/manual/Tasks/jspc.html
 /usr/share/ant/manual/Tasks/junit.html
+/usr/share/ant/manual/Tasks/junitlauncher.html
 /usr/share/ant/manual/Tasks/junitreport.html
 /usr/share/ant/manual/Tasks/length.html
 /usr/share/ant/manual/Tasks/loadfile.html
@@ -435,6 +439,7 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/manual/api/org/apache/tools/ant/filters/package-frame.html
 /usr/share/ant/manual/api/org/apache/tools/ant/filters/package-summary.html
 /usr/share/ant/manual/api/org/apache/tools/ant/filters/package-tree.html
+/usr/share/ant/manual/api/org/apache/tools/ant/filters/util/ChainReaderHelper.ChainReader.html
 /usr/share/ant/manual/api/org/apache/tools/ant/filters/util/ChainReaderHelper.html
 /usr/share/ant/manual/api/org/apache/tools/ant/filters/util/JavaClassHelper.html
 /usr/share/ant/manual/api/org/apache/tools/ant/filters/util/package-frame.html
@@ -757,6 +762,7 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/condition/IsSet.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/condition/IsSigned.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/condition/IsTrue.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/condition/JavaVersion.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/condition/Matches.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/condition/Not.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/condition/Or.html
@@ -880,7 +886,9 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/depend/constantpool/MethodHandleCPInfo.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/depend/constantpool/MethodRefCPInfo.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/depend/constantpool/MethodTypeCPInfo.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/depend/constantpool/ModuleCPInfo.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/depend/constantpool/NameAndTypeCPInfo.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/depend/constantpool/PackageCPInfo.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/depend/constantpool/StringCPInfo.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/depend/constantpool/Utf8CPInfo.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/depend/constantpool/package-frame.html
@@ -905,6 +913,7 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/ejb/InnerClassFilenameFilter.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/ejb/JbossDeploymentTool.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/ejb/JonasDeploymentTool.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/ejb/OrionDeploymentTool.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/ejb/WeblogicDeploymentTool.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/ejb/WeblogicTOPLinkDeploymentTool.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/ejb/WebsphereDeploymentTool.html
@@ -1039,6 +1048,17 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junit/package-frame.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junit/package-summary.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junit/package-tree.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/JUnitLauncherTask.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/ListenerDefinition.ListenerType.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/ListenerDefinition.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/NamedTest.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/SingleTestClass.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/TestClasses.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/TestExecutionContext.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/TestResultFormatter.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/package-frame.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/package-summary.html
+/usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/junitlauncher/package-tree.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/native2ascii/BuiltinNative2Ascii.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/native2ascii/DefaultNative2Ascii.html
 /usr/share/ant/manual/api/org/apache/tools/ant/taskdefs/optional/native2ascii/KaffeNative2Ascii.html
@@ -1225,6 +1245,7 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/manual/api/org/apache/tools/ant/types/Path.PathElement.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/Path.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/PatternSet.NameEntry.html
+/usr/share/ant/manual/api/org/apache/tools/ant/types/PatternSet.PatternFileNameEntry.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/PatternSet.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/Permissions.Permission.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/Permissions.html
@@ -1397,6 +1418,8 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/manual/api/org/apache/tools/ant/types/selectors/NotSelector.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/selectors/OrSelector.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/selectors/OwnedBySelector.html
+/usr/share/ant/manual/api/org/apache/tools/ant/types/selectors/PosixGroupSelector.html
+/usr/share/ant/manual/api/org/apache/tools/ant/types/selectors/PosixPermissionsSelector.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/selectors/PresentSelector.FilePresence.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/selectors/PresentSelector.html
 /usr/share/ant/manual/api/org/apache/tools/ant/types/selectors/ReadableSelector.html
@@ -1497,6 +1520,7 @@ rm %{buildroot}/usr/share/ant/bin/*.bat
 /usr/share/ant/manual/api/org/apache/tools/ant/util/ScriptRunnerHelper.html
 /usr/share/ant/manual/api/org/apache/tools/ant/util/SourceFileScanner.html
 /usr/share/ant/manual/api/org/apache/tools/ant/util/SplitClassLoader.html
+/usr/share/ant/manual/api/org/apache/tools/ant/util/StreamUtils.html
 /usr/share/ant/manual/api/org/apache/tools/ant/util/StringTokenizer.html
 /usr/share/ant/manual/api/org/apache/tools/ant/util/StringUtils.html
 /usr/share/ant/manual/api/org/apache/tools/ant/util/SymbolicLinkUtils.html
