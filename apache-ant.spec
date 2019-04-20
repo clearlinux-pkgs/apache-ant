@@ -4,7 +4,7 @@
 #
 Name     : apache-ant
 Version  : 1.10.5
-Release  : 11
+Release  : 12
 URL      : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.5-src.tar.gz
 Source0  : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.5-src.tar.gz
 Summary  : No detailed summary available
