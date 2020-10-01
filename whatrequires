@@ -2,9 +2,7 @@
 R-rstudio
 R-rstudio-server
 ceph
-compat-SDL2-soname1
 compat-opencv-soname42
-compat-proj-soname13
 gdal
 glmark2
 gmsh
