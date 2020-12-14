@@ -4,7 +4,7 @@
 #
 Name     : apache-ant
 Version  : 1.10.9
-Release  : 17
+Release  : 18
 URL      : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.9-src.tar.xz
 Source0  : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.9-src.tar.xz
 Summary  : No detailed summary available
