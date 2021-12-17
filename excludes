@@ -1,2 +1,5 @@
 # This file contains the output files that need %exclude. Full path
 # names, one per line.
+/usr/share/ant/lib/ant-apache-log4j.jar
+/usr/share/ant/lib/ant-apache-log4j.pom
+/usr/share/ant/manual/api/org/apache/tools/ant/listener/Log4jListener.html

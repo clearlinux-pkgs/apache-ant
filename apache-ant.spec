@@ -4,7 +4,7 @@
 #
 Name     : apache-ant
 Version  : 1.10.12
-Release  : 22
+Release  : 23
 URL      : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.12-src.tar.xz
 Source0  : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.12-src.tar.xz
 Summary  : No detailed summary available
@@ -66,7 +66,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1634671362
+export SOURCE_DATE_EPOCH=1639770958
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -76,7 +76,7 @@ make  %{?_smp_mflags}  || bash build.sh -Ddist.dir=dist dist
 
 
 %install
-export SOURCE_DATE_EPOCH=1634671362
+export SOURCE_DATE_EPOCH=1639770958
 rm -rf %{buildroot}
 ## install_prepend content
 export ANT_HOME=%{buildroot}/usr/share/ant
@@ -85,6 +85,10 @@ mkdir -p %{buildroot}/usr/share/package-licenses/apache-ant
 cp %{_builddir}/apache-ant-1.10.12/LICENSE %{buildroot}/usr/share/package-licenses/apache-ant/6f670a85beb958d9528ea018ab473486382f348e
 cp %{_builddir}/apache-ant-1.10.12/manual/LICENSE %{buildroot}/usr/share/package-licenses/apache-ant/e19d575013e2328412f2822b0495763962047618
 %make_install || bash build.sh install
+## Remove excluded files
+rm -f %{buildroot}*/usr/share/ant/lib/ant-apache-log4j.jar
+rm -f %{buildroot}*/usr/share/ant/lib/ant-apache-log4j.pom
+rm -f %{buildroot}*/usr/share/ant/manual/api/org/apache/tools/ant/listener/Log4jListener.html
 ## install_append content
 mkdir -p %{buildroot}/usr/bin
 ln -s ../share/ant/bin/ant %{buildroot}/usr/bin/ant
@@ -147,8 +151,6 @@ ln -s ../share/ant/bin/antRun %{buildroot}/usr/bin/antRun
 /usr/share/ant/lib/ant-apache-bcel.pom
 /usr/share/ant/lib/ant-apache-bsf.jar
 /usr/share/ant/lib/ant-apache-bsf.pom
-/usr/share/ant/lib/ant-apache-log4j.jar
-/usr/share/ant/lib/ant-apache-log4j.pom
 /usr/share/ant/lib/ant-apache-oro.jar
 /usr/share/ant/lib/ant-apache-oro.pom
 /usr/share/ant/lib/ant-apache-regexp.jar
@@ -554,7 +556,6 @@ ln -s ../share/ant/bin/antRun %{buildroot}/usr/bin/antRun
 /usr/share/ant/manual/api/org/apache/tools/ant/listener/AnsiColorLogger.html
 /usr/share/ant/manual/api/org/apache/tools/ant/listener/BigProjectLogger.html
 /usr/share/ant/manual/api/org/apache/tools/ant/listener/CommonsLoggingListener.html
-/usr/share/ant/manual/api/org/apache/tools/ant/listener/Log4jListener.html
 /usr/share/ant/manual/api/org/apache/tools/ant/listener/MailLogger.html
 /usr/share/ant/manual/api/org/apache/tools/ant/listener/ProfileLogger.html
 /usr/share/ant/manual/api/org/apache/tools/ant/listener/SilentLogger.html

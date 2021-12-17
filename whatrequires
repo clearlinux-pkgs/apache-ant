@@ -11,8 +11,10 @@ opencv
 openjdk
 openjdk13
 paho.mqtt.c
+pypi-jpype1
 qemu
 qemu-guest-additions
+qt6base
 qtwebengine
 texlive
 xerces-c
