@@ -4,7 +4,7 @@
 #
 Name     : apache-ant
 Version  : 1.10.12
-Release  : 23
+Release  : 24
 URL      : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.12-src.tar.xz
 Source0  : https://mirrors.ocf.berkeley.edu/apache/ant/source/apache-ant-1.10.12-src.tar.xz
 Summary  : No detailed summary available
@@ -13,7 +13,6 @@ License  : Apache-2.0
 Requires: apache-ant-bin = %{version}-%{release}
 Requires: apache-ant-data = %{version}-%{release}
 Requires: apache-ant-license = %{version}-%{release}
-BuildRequires : lxml
 BuildRequires : openjdk
 BuildRequires : openjdk-dev
 BuildRequires : python3
@@ -66,7 +65,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1639770958
+export SOURCE_DATE_EPOCH=1649788226
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -76,7 +75,7 @@ make  %{?_smp_mflags}  || bash build.sh -Ddist.dir=dist dist
 
 
 %install
-export SOURCE_DATE_EPOCH=1639770958
+export SOURCE_DATE_EPOCH=1649788226
 rm -rf %{buildroot}
 ## install_prepend content
 export ANT_HOME=%{buildroot}/usr/share/ant

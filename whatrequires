@@ -1,20 +1,4 @@
 # This file contains recursive sources that require this package
 R-rstudio
 R-rstudio-server
-ceph
-gdal
-glmark2
-gmsh
-khtml
-libreoffice
-opencv
-openjdk
-openjdk13
 paho.mqtt.c
-pypi-jpype1
-qemu
-qemu-guest-additions
-qt6base
-qtwebengine
-texlive
-xerces-c
