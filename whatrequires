@@ -1,4 +1,5 @@
 # This file contains recursive sources that require this package
 R-rstudio
 R-rstudio-server
+libreoffice
 paho.mqtt.c
